@@ -10,7 +10,7 @@ Ensinar a utilizar o software STM Studio para visualização de variáveis em di
 * Potenciômetro 10Kohm
 
 # Criando o arquivo para depuração
-Neste tutorial iremos utilizar um código basico que lê a tensão em um potenciômetro, que pode ser baixado neste repositório.
+Neste tutorial iremos utilizar um código basico que lê a tensão em um potenciômetro, que pode ser baixado neste repositório (**Atenção, é preciso descompactar o arquivo "Drivers.rar"**).
 Compile normalmente o código dentro do Keil, e então grave o na placa. Desta forma o Keil irá gerar automaticamente o arquivo **stm_studio_tuto.axf**, que irá ficar salvo no diretório "...\stm_studio_tuto\MDK-ARM\stm_studio_tuto\stm_studio_tuto.axf".
 Arquivos **.axf** contêm todo o codigo necessario para o microcontrolador funcionar, além de exibir todas variáveis com seus respectivos nomes dados no código fonte.
 
