@@ -5,7 +5,7 @@ Ensinar a utilizar o software STM Studio para visualização de variáveis em di
 * STM Studio [link](https://www.st.com/en/development-tools/stm-studio-stm32.html)
 * Keil uVision (MDK-ARM) [link](https://www.keil.com/download/product/)
 
-# Hardware necessário
+# Hardwares necessários
 * NUCLEO-F103RB [link](https://os.mbed.com/platforms/ST-Nucleo-F103RB/)
 * Potenciômetro 10Kohm
 
