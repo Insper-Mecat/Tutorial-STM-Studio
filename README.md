@@ -4,11 +4,14 @@
 # Softwares necessários
 * STM Studio [link](https://www.st.com/en/development-tools/stm-studio-stm32.html)
 * Keil uVision (MDK-ARM) [link](https://www.keil.com/download/product/)
-* CubeMX [link] (https://www.st.com/en/development-tools/stm32cubemx.html)
+* CubeMX [link](https://www.st.com/en/development-tools/stm32cubemx.html)
 
 # Hardwares necessários
 * NUCLEO-F103RB [link](https://os.mbed.com/platforms/ST-Nucleo-F103RB/)
 * Potenciômetro 10Kohm
+
+Esquema de montagem do hardware para este tutorial:
+<a href="https://imgur.com/0CSwkGI"><img src="https://imgur.com/0CSwkGI.png" title="source: imgur.com" /></a>
 
 # Configurando o projeto no cubeMX
 Abra o software cubeMX e selecione a opção "Start My project from ST Board", como mostrado abaixo:
@@ -17,47 +20,47 @@ Abra o software cubeMX e selecione a opção "Start My project from ST Board", c
 Na janela que se abrirá pesquise a placa modelo NUCLEO-F103RB e dê duplo clique na imagem dela, como mostrado abaixo:
 <a href="https://imgur.com/bX7RXBA"><img src="https://imgur.com/bX7RXBA.png" title="source: imgur.com" /></a>
 
-O cubeMX irá perguntarse deseja inicializar os periféricos no modo padrão, selecione sim, como mostrado abaixo:
+O cubeMX irá perguntar se deseja inicializar os periféricos no modo padrão, selecione sim, como mostrado abaixo:
 <a href="https://imgur.com/64geHho"><img src="https://imgur.com/64geHho.png" title="source: imgur.com" /></a>
 
 Devemos habilitar e configurar o ADC para nosso uso seguindo os passos abaixo:
 <a href="https://imgur.com/GMKstvk"><img src="https://imgur.com/GMKstvk.png" title="source: imgur.com" /></a>
-1 - Selecionar o ADC1
-2 - Habilitar o canal IN1
-3 - COnfigurar o Rank para um tempo de conversão de 239.5 ciclos
+1. Selecionar o ADC1
+2. Habilitar o canal IN1
+3. Configurar o Rank para um tempo de conversão de 239.5 ciclos
 
 Vá até a aba "Clock Configuration" e configure o clock do microcontrolador, como mostrado abaixo:
 <a href="https://imgur.com/1tEPp2f"><img src="https://imgur.com/1tEPp2f.png" title="source: imgur.com" /></a>
 
 Vá até a aba "Project Manager" e faça os seguintes passos, como mostrado abaixo:
 <a href="https://imgur.com/q5dmLkt"><img src="https://imgur.com/q5dmLkt.png" title="source: imgur.com" /></a>
-1 - Dê uma nome ao projeto
-2 - Escolha um diretório para salvá-lo
-3 - Selecione MDK-ARM e a versão V5
-4 - Clique em "Generate Code"
+1. Dê uma nome ao projeto
+2. Escolha um diretório para salvá-lo
+3. Selecione MDK-ARM e a versão V5
+4. Clique em "Generate Code"
 
 # Compilando o projeto no Keil
 Abra o projeto gerado anteriormente, e no arquivo "main.c" iremos declarar duas variáveis globais (uma para o valor puro e outra para o valor convertido em tensão), como é mostrado abaixo:
 <a href="https://imgur.com/FlGD241"><img src="https://imgur.com/FlGD241.png" title="source: imgur.com" /></a>
 
 Devemos escrever a rotina de leitura do ADC e também a conversão do valor para volts, para isto iremos escrever as seguintes funções:
-Ligar o ADC
+* Ligar o ADC
 ```javascript
 HAL_ADC_Start(&hadc1);
 ```
-Esperar uma conversão ser concluída
+* Esperar uma conversão ser concluída
 ```javascript
 HAL_ADC_PollForConversion(&hadc1,10);
 ```
-Coletar o valor da conversão
+* Coletar o valor da conversão
 ```javascript
 ADC_RAW = HAL_ADC_GetValue(&hadc1);
 ```
-Desligar o ADC
+* Desligar o ADC
 ```javascript
 HAL_ADC_Stop(&hadc1);	
 ```
-Converter o valor para volts, para isto devemos dividir o range de tensão (no caso do microcontrolador STM32F103RB é de 0 a 3.3V) pela resolução do ADC (no caso do microcontrolador STM32F103RB é de 12 bits). Este resultado iremos multiplicar pelo valor de conversão do ADC, gerando assim a leitura em volts.
+* Converter o valor para volts, para isto devemos dividir o range de tensão (no caso do microcontrolador STM32F103RB é de 0 a 3.3V) pela resolução do ADC (no caso do microcontrolador STM32F103RB é de 12 bits). Este resultado iremos multiplicar pelo valor de conversão do ADC, gerando assim a leitura em volts.
 ```javascript
 ADC_VOLTS = ADC_RAW * (3.3f/4096.0f);
 ```
